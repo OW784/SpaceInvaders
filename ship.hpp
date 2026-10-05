@@ -12,6 +12,8 @@ public:
 	virtual ~Ship() = 0;
 
 	void move_down();
+	void move_left();
+	void move_right();
 	
 	virtual void Update(const float& dt);
 protected:
@@ -26,5 +28,11 @@ public:
 	Invader();
 	Invader(const Invader& inv);
 	Invader(sf::IntRect ir, sf::Vector2f pos);
+	void Update(const float& dt) override;
+};
+
+class Player : public Ship {
+public:
+	Player();
 	void Update(const float& dt) override;
 };

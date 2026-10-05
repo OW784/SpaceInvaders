@@ -11,6 +11,8 @@ struct GameSystem
     static std::vector<std::shared_ptr<Ship>> ships;
     static sf::Texture spritesheet;
     static sf::Sprite invader;
+    static sf::Sprite player;
+    static sf::Keyboard::Key controls[5];
 
     static void init();
     static void clean();

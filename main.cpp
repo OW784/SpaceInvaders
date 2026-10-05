@@ -10,6 +10,7 @@ int main()
         sf::VideoMode({ parameters::game_width, parameters::game_height}),
         "SpaceInvaders"
     );
+    window.setMouseCursorVisible(false);
 
     GameSystem::init();
 

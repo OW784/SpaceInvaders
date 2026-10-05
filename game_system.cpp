@@ -7,6 +7,12 @@
 sf::Texture GameSystem::spritesheet;
 sf::Sprite GameSystem::invader;
 std::vector<std::shared_ptr<Ship>> GameSystem::ships;
+sf::Sprite GameSystem::player;
+
+sf::Keyboard::Key GameSystem::controls[5]{
+    sf::Keyboard::A,
+    sf::Keyboard::D
+};
 
 void GameSystem::init()
 {
@@ -14,11 +20,18 @@ void GameSystem::init()
     {
         std::cerr << "Failed to load spritesheet" << std::endl;
     }
-
+    player.setTexture(spritesheet);
     invader.setTexture(spritesheet);
+
+    sf::IntRect playerSprite;
+    playerSprite = sf::IntRect(sf::Vector2i(192, 32), sf::Vector2i(32, 32));
+    std::shared_ptr<Player> player = std::make_shared<Player>();
+    ships.push_back(player);
 
     Invader::speed = 20.f;
     Invader::direction = 5.f;
+
+
 
     for (int row = 0; row < 5; row++)
     {
