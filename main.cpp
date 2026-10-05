@@ -1,13 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "game_system.hpp"
+#include "game_parameters.hpp"
 #include <iostream>
-
-
-struct parameters {
-    static const int game_width = 800;
-    static const int game_height = 600;
-
-};
 
 
 int main()
