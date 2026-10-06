@@ -15,7 +15,7 @@ add_custom_target(copy_resources ALL
         "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/res"
 )
 
-add_executable(spaceInvaders main.cpp game_system.cpp ship.cpp)
+add_executable(spaceInvaders main.cpp game_system.cpp ship.cpp bullet.cpp)
 
 target_link_libraries(spaceInvaders PRIVATE sfml-graphics)
 

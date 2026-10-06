@@ -1,6 +1,7 @@
 #include "ship.hpp"
 #include "game_system.hpp"
 #include "game_parameters.hpp"
+#include "bullet.hpp"
 
 using param = parameters; //renaming the struct Parameters into param to have a more compact and readable code
 using gs = GameSystem;
@@ -8,6 +9,9 @@ using gs = GameSystem;
 bool Invader::direction;
 float Invader::speed;
 float Invader::acc = 5.f;
+
+
+	
 
 Ship::Ship() {};
 
@@ -79,6 +83,9 @@ Player::Player() :
 void Player::Update(const float& dt) {
 	Ship::Update(dt);
 
+	static bool mouseWasPressed = false;
+	bool mousePressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+
 	sf::Vector2f position = getPosition();
 	sf::FloatRect bounds = getGlobalBounds();
 
@@ -106,4 +113,25 @@ void Player::Update(const float& dt) {
 			move(-overshoot, 0.f);
 		}
 	}
+	if (mousePressed && !mouseWasPressed)
+	{
+		Bullet::fire(getPosition(), true);
+	}
+	mouseWasPressed = mousePressed;
+	
+}
+
+bool Ship::is_exploded() const
+{
+	return _is_exploded;
+}
+
+void Ship::explode()
+{
+	setTextureRect(sf::IntRect(
+		sf::Vector2i(128, 32),
+		sf::Vector2i(32, 32)
+	));
+
+	_is_exploded = true;
 }

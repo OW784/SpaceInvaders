@@ -3,21 +3,23 @@
 
 class Ship : public sf::Sprite {
 public:
-	Ship();
+    Ship();
+    Ship(const Ship& s);
+    Ship(sf::IntRect ir);
+    virtual ~Ship() = 0;
 
-	Ship(const Ship& s);
+    void move_down();
+    void move_left();
+    void move_right();
 
-	Ship(sf::IntRect ir);
+    virtual void Update(const float& dt);
 
-	virtual ~Ship() = 0;
+    bool is_exploded() const;
+    virtual void explode();
 
-	void move_down();
-	void move_left();
-	void move_right();
-	
-	virtual void Update(const float& dt);
 protected:
-	sf::IntRect _sprite;
+    sf::IntRect _sprite;
+    bool _is_exploded = false;
 };
 
 class Invader : public Ship {

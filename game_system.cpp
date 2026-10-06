@@ -2,6 +2,7 @@
 #include "ship.hpp"
 #include <iostream>
 #include <memory>
+#include "bullet.hpp"
 
 
 sf::Texture GameSystem::spritesheet;
@@ -11,7 +12,7 @@ sf::Sprite GameSystem::player;
 
 sf::Keyboard::Key GameSystem::controls[5]{
     sf::Keyboard::A,
-    sf::Keyboard::D
+    sf::Keyboard::D,
 };
 
 void GameSystem::init()
@@ -22,6 +23,8 @@ void GameSystem::init()
     }
     player.setTexture(spritesheet);
     invader.setTexture(spritesheet);
+
+    Bullet::init();
 
     sf::IntRect playerSprite;
     playerSprite = sf::IntRect(sf::Vector2i(192, 32), sf::Vector2i(32, 32));
@@ -94,6 +97,8 @@ void GameSystem::update(const float& dt)
     for (std::shared_ptr<Ship>& s : ships) {
         s->Update(dt);
     }
+
+    Bullet::update(dt);
 }
 
 void GameSystem::render(sf::RenderWindow& window)
@@ -101,6 +106,8 @@ void GameSystem::render(sf::RenderWindow& window)
     for (const std::shared_ptr<Ship>& s : ships) {
         window.draw(*(s.get()));
     }
+
+    Bullet::render(window);
 }
 
 void GameSystem::clean() {
